@@ -106,11 +106,12 @@ public class DMNode extends sinalgo.nodes.Node {
 	public void Pour_Un(DMMessage m) {
 		if(m.tag == Tag) {
 			this.Output = true;
+			setColor(Color.BLUE);
 		} else {
 			this.V1 = m.tag;
 			Node next = randomWalkChoice(outgoingConnections);
-			send(new DMMessage(Type.UN, m.tag), next);
-			System.out.println(this + " is sending now message of type UN");
+			send(new DMMessage(Type.DEUX, m.tag), next);
+			System.out.println(this + " is sending now message of type DEUX avec tag " + this.Tag);
 		}
 	}
 	public void Pour_Deux(DMMessage m) {
@@ -118,8 +119,8 @@ public class DMNode extends sinalgo.nodes.Node {
 		if(this.V1 < this.V2 && this.V1 < this.Tag) {
 			this.Tag = this.V1;
 			Node next = randomWalkChoice(outgoingConnections);
-			send(new DMMessage(Type.DEUX, m.tag), next);
-			System.out.println(this + " is sending now message of type DEUX");
+			send(new DMMessage(Type.UN, this.Tag), next);
+			System.out.println(this + " is sending now message of type UN " + this.Tag);
 		} else {
 			this.etat = State.PASSIF;
 		}
