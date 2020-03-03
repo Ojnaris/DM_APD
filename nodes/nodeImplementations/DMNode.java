@@ -86,10 +86,8 @@ public class DMNode extends sinalgo.nodes.Node {
 	
 	Node nextNode(sinalgo.nodes.Connections neighbors) {
 		int degree = neighbors.size();
-		System.out.println("degree = " + degree);
 		sinalgo.tools.storage.ReusableListIterator<Edge> iter = neighbors.iterator();
 		Node node = iter.next().endNode;
-		System.out.println("neighbor : " + node);
 		return node;
 	}
 
