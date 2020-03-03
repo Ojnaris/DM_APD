@@ -7,6 +7,8 @@ import projects.dm.nodes.messages.DMMessage;
 import projects.dm.nodes.messages.DMMessage.Type;
 import projects.dm.nodes.timers.InitTimer;
 import sinalgo.nodes.Node;
+import sinalgo.nodes.edges.Edge;
+import sinalgo.tools.storage.ReusableListIterator;
 
 public class DMNode extends sinalgo.nodes.Node {
 	
@@ -36,9 +38,8 @@ public class DMNode extends sinalgo.nodes.Node {
 	public void initiate() {
 		DMMessage DM = new DMMessage(Type.UN, Tag);
 		System.out.println(this + " is sending now message " + DM);
-		System.out.println(outgoingConnections.iterator().hasNext());
-		System.out.println(outgoingConnections.iterator().next().endNode);
-		send(DM, outgoingConnections.iterator().next().endNode);
+		Node node = nextNode(outgoingConnections);
+		send(DM, node);
 	}
 		
 	public String toString() {
@@ -51,7 +52,7 @@ public class DMNode extends sinalgo.nodes.Node {
 			if (msg instanceof DMMessage) {
 				DMMessage dm = (DMMessage) msg;
 				if(this.etat == State.PASSIF) {
-					Node next = randomWalkChoice(outgoingConnections);		
+					Node next = nextNode(outgoingConnections);		
 					send(dm, next);
 					System.out.println(this + " received message " + dm + 
 									   " and sends it now to " + next);
@@ -73,12 +74,22 @@ public class DMNode extends sinalgo.nodes.Node {
 	private static Random random = new Random();
 	Node randomWalkChoice(sinalgo.nodes.Connections neighbors) {
 		int degree = neighbors.size();
+		System.out.println("degree = " + degree);
 		if (degree == 0) throw new RuntimeException("no neighbor");
 		int positionOfNext = random.nextInt(degree);
 		sinalgo.tools.storage.ReusableListIterator<sinalgo.nodes.edges.Edge> iter 
 			= neighbors.iterator();
 		Node node = iter.next().endNode;
 		for (int i = 1; i <= positionOfNext; i++) node = iter.next().endNode;
+		return node;
+	}
+	
+	Node nextNode(sinalgo.nodes.Connections neighbors) {
+		int degree = neighbors.size();
+		System.out.println("degree = " + degree);
+		sinalgo.tools.storage.ReusableListIterator<Edge> iter = neighbors.iterator();
+		Node node = iter.next().endNode;
+		System.out.println("neighbor : " + node);
 		return node;
 	}
 

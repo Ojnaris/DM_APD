@@ -244,7 +244,7 @@ public class CustomGlobal extends AbstractCustomGlobal{
 			theNodes[i] = node;
 			angle += initAngle;
 		}
-		addEdge(theNodes[0], theNodes[numOfNodes - 1]);
+		addEdge(theNodes[numOfNodes - 1], theNodes[0]);
 		// Repaint the GUI as we have added some nodes
 		sinalgo.tools.Tools.repaintGUI();
 	}
