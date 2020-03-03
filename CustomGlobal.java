@@ -78,7 +78,7 @@ public class CustomGlobal extends AbstractCustomGlobal{
 	/** Button to create a ring network. */
 	@AbstractCustomGlobal.CustomButton(buttonText="Build a Ring Network")
 	public void ringButton() {
-		buildRing(4);
+		buildRing(15);
 	}
 
 	private void addEdge(Node from, Node to) {

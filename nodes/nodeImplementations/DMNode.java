@@ -86,10 +86,8 @@ public class DMNode extends sinalgo.nodes.Node {
 	
 	Node nextNode(sinalgo.nodes.Connections neighbors) {
 		int degree = neighbors.size();
-		System.out.println("degree = " + degree);
 		sinalgo.tools.storage.ReusableListIterator<Edge> iter = neighbors.iterator();
 		Node node = iter.next().endNode;
-		System.out.println("neighbor : " + node);
 		return node;
 	}
 
@@ -120,7 +118,7 @@ public class DMNode extends sinalgo.nodes.Node {
 			this.Tag = this.V1;
 			Node next = randomWalkChoice(outgoingConnections);
 			send(new DMMessage(Type.UN, this.Tag), next);
-			System.out.println(this + " is sending now message of type UN " + this.Tag);
+			System.out.println(this + " is sending now message of type UN avec tag" + this.Tag);
 		} else {
 			this.etat = State.PASSIF;
 		}
