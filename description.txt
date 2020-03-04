@@ -1,22 +1,37 @@
---  WALKER  --
-
-  a very simple example
-  a random walk with one walker:
-    there is only one message in the network
-    this message is emitted by a (single) initiator (called InitNode)
-    it is transmitted through the network 
-       the next node is chosen at random uniformly among the neighbors
-       (we call this function randomChoice)
-    ... until it reaches its destination: the EndNode which stops it.
+--  DM  --
     
- Algorithm: (the message is called "the walker")
+ 	Algorithm: 
+    
+    1: Output ← Faux
+	2: Etat ← actif
+	3: Tag ← Idp
+	4: Envoyer <Un, Tag> à D
+	9: Pour toujours
+	10:		Réceptionner <Type, T> de G
+	11:		Si Etat = passif alors
+	12:			Envoyer >Type, T> à D
+	13:		SinonSi Type = Un alors
+	14:			Pour_Un(T)
+	15: 	Sinon
+	16:			Pour Deux(T)
+	17:		Fin Si
+	18: Fin Pour toujours
+	
 
-    1: if InitNode then
-    2:     send the walker to next = randomChoice
+Fonction Pour_Un(T):
+	19: Si T = Tag alors
+	20:		Output ← vrai
+	21: Sinon
+	22:		V1 ← T
+	23:		Envoyer <Deux, T> à D
+	24: Fin Si
 
-	3: forever
-    4:     receive the walker from some node N
-    4:     if EndNode then
-    5:         do nothing! 
-    6:     else
-    7:         send the walker to next = randomChoice 
+
+Fonction Pour_Deux(T)
+	25: V2 ← T
+	26: Si V1 < V2 ∧ V1 < Tag alors
+	27:		Tag ← V1
+	28:		Envoyer <Un, Tag> à D
+	29: Sinon
+	30:		Etat ← passif
+	31: Fin Si

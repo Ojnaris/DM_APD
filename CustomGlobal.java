@@ -3,6 +3,7 @@
 package projects.dm;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import projects.dm.nodes.nodeImplementations.*;
 import sinalgo.nodes.Node;
@@ -78,7 +79,7 @@ public class CustomGlobal extends AbstractCustomGlobal{
 	/** Button to create a ring network. */
 	@AbstractCustomGlobal.CustomButton(buttonText="Build a Ring Network")
 	public void ringButton() {
-		buildRing(4);
+		buildRing(15);
 	}
 
 	private void addEdge(Node from, Node to) {
@@ -234,22 +235,31 @@ public class CustomGlobal extends AbstractCustomGlobal{
 		double initAngle = 2 * Math.PI / numOfNodes;
 		double range = 200.0;
 		double angle = 0;
+		
+		for(int i = 0; i < numOfNodes; i++) {
+			theNodes[i] = new DMNode();
+		}
+		
+		Random random = new Random();
+		int pos1, pos2;
+		Node node;
+		for(int i = 0; i < random.nextInt(100); i++) {
+			pos1 = i%numOfNodes;
+			pos2 = random.nextInt(numOfNodes);
+			node = theNodes[pos1];
+			theNodes[pos1] = theNodes[pos2];
+			theNodes[pos2] = (DMNode) node;
+		}
+		
 		for(int i = 0; i < numOfNodes; i++){
 			double posX = centerPosX + range * Math.cos(angle);
 			double posY = centerPosY + range * Math.sin(angle);
-			DMNode node = new DMNode();
+			node = theNodes[i];
 			node.setPosition(posX, posY, 0);
 			node.finishInitializationWithDefaultModels(true);
 			if (i > 0) addEdge(theNodes[i - 1], node);
-			theNodes[i] = node;
 			angle += initAngle;
 		}
-		
-		//Alteration of the increasing order
-		theNodes[1].setTag(3);
-		theNodes[2].setTag(2);
-		theNodes[3].setTag(4);
-		
 		addEdge(theNodes[numOfNodes - 1], theNodes[0]);
 		// Repaint the GUI as we have added some nodes
 		sinalgo.tools.Tools.repaintGUI();
