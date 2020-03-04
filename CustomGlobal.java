@@ -78,7 +78,7 @@ public class CustomGlobal extends AbstractCustomGlobal{
 	/** Button to create a ring network. */
 	@AbstractCustomGlobal.CustomButton(buttonText="Build a Ring Network")
 	public void ringButton() {
-		buildRing(6);
+		buildRing(4);
 	}
 
 	private void addEdge(Node from, Node to) {
@@ -246,8 +246,9 @@ public class CustomGlobal extends AbstractCustomGlobal{
 		}
 		
 		//Alteration of the increasing order
-		theNodes[2].setTag(4);
-		theNodes[3].setTag(3);
+		theNodes[1].setTag(3);
+		theNodes[2].setTag(2);
+		theNodes[3].setTag(4);
 		
 		addEdge(theNodes[numOfNodes - 1], theNodes[0]);
 		// Repaint the GUI as we have added some nodes

@@ -128,6 +128,7 @@ public class DMNode extends sinalgo.nodes.Node {
 	
 	public void setTag(int t) {
 		this.Tag = t;
+		this.ID = t;
 	}
 	
 }
