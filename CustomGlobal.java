@@ -78,7 +78,7 @@ public class CustomGlobal extends AbstractCustomGlobal{
 	/** Button to create a ring network. */
 	@AbstractCustomGlobal.CustomButton(buttonText="Build a Ring Network")
 	public void ringButton() {
-		buildRing(4);
+		buildRing(6);
 	}
 
 	private void addEdge(Node from, Node to) {
@@ -244,6 +244,11 @@ public class CustomGlobal extends AbstractCustomGlobal{
 			theNodes[i] = node;
 			angle += initAngle;
 		}
+		
+		//Alteration of the increasing order
+		theNodes[2].setTag(4);
+		theNodes[3].setTag(3);
+		
 		addEdge(theNodes[numOfNodes - 1], theNodes[0]);
 		// Repaint the GUI as we have added some nodes
 		sinalgo.tools.Tools.repaintGUI();

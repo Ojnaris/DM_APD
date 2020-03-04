@@ -111,7 +111,7 @@ public class DMNode extends sinalgo.nodes.Node {
 			this.V1 = m.tag;
 			Node next = randomWalkChoice(outgoingConnections);
 			send(new DMMessage(Type.DEUX, m.tag), next);
-			System.out.println(this + " is sending now message of type DEUX avec tag " + this.Tag);
+			System.out.println(this + " is sending now message of type DEUX avec tag " + m.tag);
 		}
 	}
 	public void Pour_Deux(DMMessage m) {
@@ -124,6 +124,10 @@ public class DMNode extends sinalgo.nodes.Node {
 		} else {
 			this.etat = State.PASSIF;
 		}
+	}
+	
+	public void setTag(int t) {
+		this.Tag = t;
 	}
 	
 }
